@@ -6,15 +6,28 @@
 get_header(); ?>
 
 <!-- Hero Section -->
+<?php
+// Fetch the options from the theme options page
+$options = get_option('custom_clearance_theme_options');
+
+// Get the values for Hero Section
+$hero_image = isset($options['contact_hero_image']) ? $options['contact_hero_image'] : ''; 
+$hero_title = isset($options['contact_hero_title']) ? $options['contact_hero_title'] : 'Contactez-Nous'; 
+$breadcrumb_home = isset($options['contact_breadcrumb_home']) ? $options['contact_breadcrumb_home'] : 'Accueil'; 
+$breadcrumb_current = isset($options['contact_breadcrumb_current']) ? $options['contact_breadcrumb_current'] : 'Contact';
+?>
 
 <section class="bg-gradient-to-r from-[#0F2033] to-[#1A2B3C] text-white py-20 px-4 text-center relative overflow-hidden"
-    style="background-image: url('https://customsclearance.ma/wp-content/uploads/2015/11/header_bg_5.jpg');  background-position: center; background-repeat: no-repeat; background-size: cover; height: 300px;">
+    style="background-image: url('<?php echo esc_url($hero_image); ?>'); background-position: center; background-repeat: no-repeat; background-size: cover; height: 300px;">
     <div class="absolute inset-0 bg-black opacity-50"></div>
     <div class="container mx-auto max-w-[1221px] px-4 relative z-10">
         <div class="text-center">
-            <h1 class="text-4xl lg:text-5xl font-bold text-white leading-tight">Contactez-Nous</h1>
+            <h1 class="text-4xl lg:text-5xl font-bold text-white leading-tight">
+                <?php echo esc_html($hero_title); ?>
+            </h1>
             <div class="text-lg text-white mt-4">
-                <a href="<?php echo home_url(); ?>" class="hover:underline">Accueil</a> &raquo; <span>Contact</span>
+                <a href="<?php echo home_url(); ?>" class="hover:underline"><?php echo esc_html($breadcrumb_home); ?></a> &raquo; 
+                <span><?php echo esc_html($breadcrumb_current); ?></span>
             </div>
         </div>
     </div>
@@ -38,31 +51,11 @@ get_header(); ?>
 
             <!-- Right Section - Form -->
             <div class="bg-white p-8 rounded-xl shadow-lg">
-                <form id="contactFormElement" class="space-y-6 text-[#17476a]">
-                    <div>
-                        <label for="name" class="sr-only">Nom / Société</label>
-                        <input type="text" id="name" name="name" placeholder="Nom / Société" class="w-full px-4 py-3 border-2 border-[#E5E7EB] rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-[#3B82F6]" required>
-                    </div>
-
-                    <div>
-                        <label for="email" class="sr-only">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Email" class="w-full px-4 py-3 border-2 border-[#E5E7EB] rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-[#3B82F6]" required>
-                    </div>
-
-                    <div>
-                        <label for="phone" class="sr-only">Téléphone</label>
-                        <input type="tel" id="phone" name="phone" placeholder="Téléphone" class="w-full px-4 py-3 border-2 border-[#E5E7EB] rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-[#3B82F6]" required>
-                    </div>
-
-                    <div>
-                        <label for="message" class="sr-only">Votre message</label>
-                        <textarea id="message" name="message" placeholder="Votre message" rows="4" class="w-full px-4 py-3 border-2 border-[#E5E7EB] rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-[#3B82F6]" required></textarea>
-                    </div>
-
-                    <button type="submit" class="w-full bg-[#0F2033] text-white px-6 py-4 rounded-lg text-lg font-semibold hover:bg-[#1A2B3C] transform transition-all duration-300 submit-btn">Envoyer</button>
-                </form>
+                <div class="newform">
+                    <?php echo do_shortcode( '[contact-form-7 id="cc564fa" title="Contact form page"]');?>
+                </div>               
             </div>
-        </div>
+    </div>
     </div>
 </main>
 
